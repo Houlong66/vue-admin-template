@@ -1,4 +1,4 @@
-# pinkuai-admin
+# vue-admin-template
 
 ## Project setup
 ```
