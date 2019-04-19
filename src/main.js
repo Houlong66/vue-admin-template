@@ -11,6 +11,9 @@ import '@/style/main.scss'
 // svg
 import '@/icons'
 
+// 引入通用组件
+import CmComponents from '@/views/common'
+
 // api
 import api from '@/api'
 Vue.prototype.api = api
@@ -20,6 +23,7 @@ import base from '@/utils/base'
 
 Vue.config.productionTip = false
 
+Vue.use(CmComponents)
 Vue.use(base)
 Vue.use(ElementUI)
 

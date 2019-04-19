@@ -10,36 +10,39 @@
         background-color="#304155"
         text-color="#C1CFD9"
         active-text-color="#409EFF"
-        default-active="order"
+        :default-active="$route.name"
+        router
       >
-        <el-submenu index="1">
-          <template slot="title">
-            <i class="el-icon-location"></i>
-            <span>导航一</span>
-          </template>
-          <el-menu-item-group>
-            <el-menu-item index="1-1">选项1</el-menu-item>
-            <el-menu-item index="1-2">选项2</el-menu-item>
-          </el-menu-item-group>
-        </el-submenu>
-        <el-menu-item index="order">
-          <i class="el-icon-location"></i>
-          <span slot="title">订单录入</span>
-        </el-menu-item>
-        <el-menu-item index="manual">
-          <i class="el-icon-edit"></i>
-          <span slot="title">手工录入</span>
-        </el-menu-item>
-        <el-menu-item index="query">
-          <i class="el-icon-location"></i>
-          <span slot="title">订单查询</span>
-        </el-menu-item>
+        <div v-for="(route,index) in sideBarRoutes" :key="index">
+          <el-submenu v-if="route.children" :index="route.name" :route="{'name':route.name}">
+            <template slot="title">
+              <i :class="route.meta.routeIcon"></i>
+              <span>{{route.meta.routeText}}</span>
+            </template>
+            <el-menu-item-group>
+              <el-menu-item
+                v-for="(subRoute,i) in route.children"
+                :key="i"
+                :index="subRoute.name"
+                :route="{'name':subRoute.name}"
+              >
+                <i :class="subRoute.meta.routeIcon"></i>
+                <span slot="title">{{subRoute.meta.routeText}}</span>
+              </el-menu-item>
+            </el-menu-item-group>
+          </el-submenu>
+          <el-menu-item v-else :index="route.name" :route="{'name':route.name}">
+            <i :class="route.meta.routeIcon"></i>
+            <span slot="title">{{route.meta.routeText}}</span>
+          </el-menu-item>
+        </div>
       </el-menu>
     </div>
   </el-aside>
 </template>
 
 <script>
+import routes from '@/router/routes'
 export default {
   name: "SideBar",
   data() {
@@ -47,6 +50,8 @@ export default {
       isCollapse: false,
       tabWidth: 160,
       intelval: null,
+      sideBarRoutes: [],
+      path: ""
     };
   },
   methods: {
@@ -64,7 +69,10 @@ export default {
         }, 1);
       }
       this.isCollapse = !this.isCollapse;
-    }
+    },
+  },
+  created() {
+    this.sideBarRoutes = routes.find(item => item.name === 'main').children
   }
 };
 </script>
@@ -102,5 +110,12 @@ aside {
   .el-menu-item.is-active i {
     color: inherit !important;
   }
+}
+.el-menu--collapse .el-submenu .el-submenu__title span {
+  height: 0;
+  width: 0;
+  overflow: hidden;
+  visibility: hidden;
+  display: inline-block;
 }
 </style>
