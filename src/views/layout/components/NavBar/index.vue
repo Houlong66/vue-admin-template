@@ -3,9 +3,11 @@
     <el-row class="navbar-container" type="flex" justify="space-between" align="middle">
       <el-col :span="6">
         <el-breadcrumb separator="/">
-          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-          <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-          <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+          <el-breadcrumb-item
+            v-for="(item,index) in breadCrumbs"
+            :key="index"
+            :to="{path: item.to}"
+          >{{item.text}}</el-breadcrumb-item>
         </el-breadcrumb>
       </el-col>
       <el-col :span="6">
@@ -18,7 +20,8 @@
           </el-tooltip>
           <el-dropdown @command="handleCommand" trigger="click">
             <a class="avatar-box" href="javascript:void(0)">
-              <img :src="images.avatar"><i class="el-icon-caret-bottom"></i>
+              <img :src="images.avatar">
+              <i class="el-icon-caret-bottom"></i>
             </a>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item command="logOut">退出登录</el-dropdown-item>
@@ -36,13 +39,44 @@ export default {
     return {
       images: {
         'avatar': require('../../../../assets/avatar.jpg')
-      }
+      },
+      breadCrumbs: [
+        {
+          text: "首页",
+          to: "/"
+        }
+      ]
+    }
+  },
+  watch: {
+    "$route": function () {
+      this.initBar()
     }
   },
   methods: {
     handleCommand(command) {
       console.log(command)
+    },
+    initBar() {
+      this.breadCrumbs = [
+        {
+          text: "首页",
+          to: "/"
+        }
+      ]
+      this.$route.matched.forEach(item => {
+        if (item.meta.routeText&&item.meta.routeText!=='首页') {
+          let tempObj = {
+            text: item.meta.routeText,
+            to: item.path
+          }
+          this.breadCrumbs.push(tempObj)
+        }
+      })
     }
+  },
+  created() {
+    this.initBar()
   }
 }
 </script>

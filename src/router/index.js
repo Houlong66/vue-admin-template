@@ -4,9 +4,21 @@ import store from '@/store'
 import localStore from 'storejs'
 import nProgress from 'nprogress'
 
-import routes from './routes'
+import sideBarRoutes from './sideBarRoutes'
+const NotFound = resolve => require(['@/views/other/404.vue'], resolve)
 
 Vue.use(Router)
+
+let routes = [{
+    path: '/404',
+    component: NotFound,
+  },
+  {
+    path: "*",
+    redirect: '/404'
+  }
+]
+routes = routes.concat(sideBarRoutes)
 
 const router = new Router({
   mode: 'history',

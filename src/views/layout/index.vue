@@ -4,22 +4,36 @@
     <el-container class="container">
       <el-header class="nav-container">
         <nav-bar></nav-bar>
+        <tab-bar></tab-bar>
       </el-header>
       <el-main class="main-container">
-        <router-view/>
+        <transition name="fade-transform" mode="out-in">
+          <keep-alive :include="cachedViews">
+            <router-view :key="key"/>
+          </keep-alive>
+        </transition>
       </el-main>
     </el-container>
   </el-container>
 </template>
 
 <script>
-import {SideBar, NavBar} from './components'
+import { SideBar, NavBar, TabBar } from './components'
 
 export default {
   name: "Layout",
   components: {
     SideBar,
-    NavBar
+    NavBar,
+    TabBar
+  },
+  computed: {
+    key() {
+      return this.$route.fullPath
+    },
+    cachedViews() {
+      return this.$store.state.route.cachedRoutes
+    }
   }
 }
 </script>
@@ -34,7 +48,7 @@ export default {
   background: #ffffff;
   .nav-container {
     padding: 0;
-    height: 50px !important;
+    height: 85px !important;
   }
   .main-container {
     background: #f8f8f8;
