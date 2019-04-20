@@ -1,7 +1,8 @@
 <template>
   <div>
-    <el-button @click="$router.push('/test_father/test_child1')">测试子路由1</el-button>
+    <el-button @click="$router.push({name:'testChild2'})">测试子路由2</el-button>
     <el-input v-model="test"></el-input>
+    <router-view></router-view>
   </div>
 </template>
 

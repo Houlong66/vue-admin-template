@@ -3,6 +3,7 @@ const TestForm = resolve => require(['@/views/main/TestForm.vue'], resolve)
 const TestTable = resolve => require(['@/views/main/TestTable.vue'], resolve)
 const TestChild = resolve => require(['@/views/main/TestChild.vue'], resolve)
 const TestChild1 = resolve => require(['@/views/main/TestChild1.vue'], resolve)
+const TestChild2 = resolve => require(['@/views/main/TestChild2.vue'], resolve)
 const TestMain = resolve => require(['@/views/main/TestMain.vue'], resolve)
 
 const routes = [{
@@ -57,7 +58,9 @@ const routes = [{
       routeText: "测试父路由",
       routeIcon: "el-icon-location"
     },
-    redirect: {name: 'testChild'},
+    redirect: {
+      name: 'testChild'
+    },
     component: Layout,
     children: [{
         path: 'test_child',
@@ -68,6 +71,14 @@ const routes = [{
           keepAlive: true
         },
         component: TestChild,
+        children: [{
+          path: 'test_child2',
+          name: "testChild2",
+          meta: {
+            routeText: "测试子路由2"
+          },
+          component: TestChild2
+        }]
       },
       {
         path: 'test_child1',

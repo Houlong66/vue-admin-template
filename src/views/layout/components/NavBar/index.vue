@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-row class="navbar-container" type="flex" justify="space-between" align="middle">
-      <el-col :span="6">
+      <el-col :span="15">
         <el-breadcrumb separator="/">
           <el-breadcrumb-item
             v-for="(item,index) in breadCrumbs"
