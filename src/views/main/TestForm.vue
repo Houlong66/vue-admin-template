@@ -3,6 +3,7 @@
     <el-row>
       <el-col :span="12">
         <cm-form
+          ref="cmForm"
           :formList="formList"
           :buttonOption="buttonOption"
           @clickSubmit="clickSubmit"
@@ -133,7 +134,7 @@ export default {
   methods: {
     clickSubmit(...data) {
       console.log(data[0])
-    }
+    },
   }
 }
 </script>

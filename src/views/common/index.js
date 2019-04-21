@@ -1,7 +1,9 @@
 import CmForm from './CmForm'
+import CmTable from './CmTable'
 
 const components = [
-  CmForm
+  CmForm,
+  CmTable
 ]
 
 const install = function (Vue) {
