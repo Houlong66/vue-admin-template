@@ -1,13 +1,14 @@
 <template>
   <div class="tab-container">
-    <div
-      v-for="(item,index) in route.routeTabs"
-      :key="index"
-      :class="{'tab':true,'chosen':isChosen(item.name)}"
-    >
-      <span @click="handleClick(item)" class="tab-text">{{item.text}}</span>
-      <span v-if="isClosable(item.name)" @click="handleClose(index)" class="closable">x</span>
-    </div>
+    <template v-for="(item,index) in route.routeTabs">
+      <div :key="index" v-if="isChosen(item.name)" class="tab chosen">
+        <span class="tab-text">{{item.text}}</span>
+        <span @click="handleClose(index)" class="closable" v-if="isClosable(item.name)">x</span>
+      </div>
+      <div :key="index" v-else class="tab" @click="handleClick(item)">
+        <span class="tab-text">{{item.text}}</span>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -28,7 +29,7 @@ export default {
   methods: {
     initBar() {
       // 如果初次访问的是首页，就不用添加项
-      if (this.$route.name==='main'||!this.$route.meta.showSideBar) return
+      if (this.$route.name === 'main' || !this.$route.meta.showSideBar) return
       let tempObj = {
         name: this.$route.name,
         text: this.$route.meta.routeText

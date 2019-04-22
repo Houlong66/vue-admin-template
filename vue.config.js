@@ -5,6 +5,9 @@ function resolve(dir) {
 }
 
 module.exports = {
+  publicPath: process.env.VUE_APP_BASE_URL,
+  // 输出文件目录
+  outputDir: 'vue-admin-template',
   chainWebpack: config => {
     // svg loader
     const svgRule = config.module.rule('svg') // 找到svg-loader

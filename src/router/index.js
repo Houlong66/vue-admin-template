@@ -21,7 +21,7 @@ let routes = [{
 routes = routes.concat(sideBarRoutes)
 
 const router = new Router({
-  mode: 'history',
+  // mode: 'history',
   base: process.env.VUE_APP_BASE_URL,
   routes
 })
