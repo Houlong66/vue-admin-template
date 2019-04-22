@@ -12,10 +12,18 @@
       </el-col>
       <el-col :span="10">
         <el-row type="flex" align="middle" justify="end" class="navbar-right-row">
-          <header-search style="z-index:1"></header-search>
-          <vue-star animate="animated rubberBand" color="#F05654">
-            <svg-icon slot="icon" iconName="good" style="cursor:pointer" height="20" width="20"></svg-icon>
-          </vue-star>
+          <header-search></header-search>
+          <el-tooltip class="item" effect="dark" content="点赞" placement="bottom" :open-delay="500">
+            <svg-icon
+              iconName="good"
+              style="cursor:pointer"
+              height="20"
+              width="20"
+              :style="{'color':isColor}"
+              :class="isAnimated"
+              @click.native="handleLike"
+            ></svg-icon>
+          </el-tooltip>
           <el-dropdown @command="handleCommand" trigger="click">
             <a class="avatar-box" href="javascript:void(0)">
               <img :src="images.avatar">
@@ -33,7 +41,6 @@
 
 <script>
 import HeaderSearch from '../HeaderSearch'
-import VueStar from 'vue-star'
 export default {
   data() {
     return {
@@ -45,16 +52,24 @@ export default {
           text: "首页",
           to: "/"
         }
-      ]
+      ],
+      like: false
     }
   },
   components: {
-    HeaderSearch,
-    VueStar
+    HeaderSearch
   },
   watch: {
     "$route": function () {
       this.initBar()
+    }
+  },
+  computed: {
+    isAnimated() {
+      return this.like ? "animated heartBeat" : ""
+    },
+    isColor() {
+      return this.like? "#F05654": ""
     }
   },
   methods: {
@@ -77,6 +92,9 @@ export default {
           this.breadCrumbs.push(tempObj)
         }
       })
+    },
+    handleLike() {
+      this.like = !this.like
     }
   },
   created() {
@@ -110,16 +128,5 @@ $navBarHeight: 50px;
       margin-right: 5px;
     }
   }
-}
-.VueStar {
-  position: static;
-}
-/deep/ .VueStar__ground {
-  width: 30px;
-  height: 30px;
-}
-/deep/ .VueStar__decoration {
-  margin-left: -27px;
-  margin-top: -27px;
 }
 </style>
