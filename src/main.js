@@ -12,7 +12,7 @@ import '@/style/main.scss'
 import '@/icons'
 
 // 引入通用组件
-import CmComponents from '@/views/common'
+import CmComponents from '@/components'
 
 // api
 import api from '@/api'

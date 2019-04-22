@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import store from '@/store'
 import localStore from 'storejs'
 import nProgress from 'nprogress'
+import 'nprogress/nprogress.css'
 
 import sideBarRoutes from './sideBarRoutes'
 const NotFound = resolve => require(['@/views/other/404.vue'], resolve)
