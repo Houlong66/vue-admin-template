@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: "testChild",
+  name: "TestChild",
   data() {
     return {
       test: ""

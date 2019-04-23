@@ -1,7 +1,7 @@
 const state = {
   // 已访问的路由项列表
   routeTabs: [{
-    name: 'main',
+    name: 'Main',
     text: '首页'
   }],
   cachedRoutes: []

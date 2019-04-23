@@ -3,11 +3,14 @@
     <el-row class="navbar-container" type="flex" justify="space-between" align="middle">
       <el-col :span="14">
         <el-breadcrumb separator="/">
-          <el-breadcrumb-item
-            v-for="(item,index) in breadCrumbs"
-            :key="index"
-            :to="{path: item.to}"
-          >{{item.text}}</el-breadcrumb-item>
+          <template v-for="(item,index) in breadCrumbs">
+            <el-breadcrumb-item
+              v-if="isChange"
+              :key="index"
+              :to="{path: item.to}"
+              :class="index===breadCrumbs.length-1?'animated lightSpeedIn fast':''"
+            >{{item.text}}</el-breadcrumb-item>
+          </template>
         </el-breadcrumb>
       </el-col>
       <el-col :span="10">
@@ -53,7 +56,8 @@ export default {
           to: "/"
         }
       ],
-      like: false
+      like: false,
+      isChange: true // 路由切换时的状态记录
     }
   },
   components: {
@@ -69,7 +73,7 @@ export default {
       return this.like ? "animated heartBeat" : ""
     },
     isColor() {
-      return this.like? "#F05654": ""
+      return this.like ? "#F05654" : ""
     }
   },
   methods: {
@@ -77,6 +81,8 @@ export default {
       console.log(command)
     },
     initBar() {
+      // 切换成false让组件重渲染
+      this.isChange = false
       this.breadCrumbs = [
         {
           text: "首页",
@@ -91,6 +97,9 @@ export default {
           }
           this.breadCrumbs.push(tempObj)
         }
+      })
+      this.$nextTick(() => {
+        this.isChange = true
       })
     },
     handleLike() {

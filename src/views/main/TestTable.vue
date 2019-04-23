@@ -19,7 +19,7 @@
 <script>
 
 export default {
-  name: 'testTable',
+  name: 'TestTable',
   data() {
     return {
       total: 0,

@@ -13,7 +13,7 @@ const routes = [{
     component: Layout,
     children: [{
       path: '/main',
-      name: "main",
+      name: "Main",
       meta: {
         routeText: "首页",
         routeIcon: "el-icon-goods",
@@ -27,7 +27,7 @@ const routes = [{
     component: Layout,
     children: [{
       path: 'index',
-      name: 'testForm',
+      name: 'TestForm',
       meta: {
         routeText: "测试表单",
         routeIcon: "el-icon-location",
@@ -42,7 +42,7 @@ const routes = [{
     component: Layout,
     children: [{
       path: 'index',
-      name: 'testTable',
+      name: 'TestTable',
       meta: {
         routeText: "测试表格",
         routeIcon: "el-icon-location",
@@ -59,12 +59,12 @@ const routes = [{
       routeIcon: "el-icon-location"
     },
     redirect: {
-      name: 'testChild'
+      name: 'TestChild'
     },
     component: Layout,
     children: [{
         path: 'test_child',
-        name: "testChild",
+        name: "TestChild",
         meta: {
           routeText: "测试子路由",
           showSideBar: true,
@@ -73,7 +73,7 @@ const routes = [{
         component: TestChild,
         children: [{
           path: 'test_child2',
-          name: "testChild2",
+          name: "TestChild2",
           meta: {
             routeText: "测试子路由2"
           },
@@ -82,7 +82,7 @@ const routes = [{
       },
       {
         path: 'test_child1',
-        name: "testChild1",
+        name: "TestChild1",
         meta: {
           routeText: "测试子路由1",
           showSideBar: true
