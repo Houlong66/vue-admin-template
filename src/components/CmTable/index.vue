@@ -6,6 +6,7 @@
       id="cmTable"
       v-loading.cmTable="options.loading"
       :data="list"
+      :height="height"
       :max-height="maxHeight"
       :stripe="options.stripe"
       :highlight-current-row="options.highlightCurrentRow"
@@ -113,6 +114,10 @@ export default {
     pagination: {
       type: Object,
       default: null // 分页参数 === pageSize:每页展示的条数，pageIndex:当前页，pageArray: 每页展示条数的控制集合，默认 _page_array
+    },
+    height: {
+      type: String,
+      default: "auto"
     },
     maxHeight: {
       type: Number,

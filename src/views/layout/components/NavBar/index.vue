@@ -17,21 +17,15 @@
         <el-row type="flex" align="middle" justify="end" class="navbar-right-row">
           <header-search></header-search>
           <el-tooltip class="item" effect="dark" content="点赞" placement="bottom" :open-delay="500">
-            <svg-icon
-              iconName="good"
-              style="cursor:pointer"
-              height="20"
-              width="20"
-              :style="{'color':isColor}"
-              :class="isAnimated"
-              @click.native="handleLike"
-            ></svg-icon>
+            <cm-star @handleClick="handleLike">
+              <svg-icon iconName="good" height="20" width="20"></svg-icon>
+            </cm-star>
           </el-tooltip>
-          <el-dropdown @command="handleCommand" trigger="click">
-            <a class="avatar-box" href="javascript:void(0)">
+          <el-dropdown @command="handleCommand">
+            <div class="avatar-box" @mouseenter="isEnter=true" @mouseleave="isEnter=false" :class="isEnterAvatar">
               <img :src="images.avatar">
-              <i class="el-icon-caret-bottom"></i>
-            </a>
+              <!-- <i class="el-icon-caret-bottom"></i> -->
+            </div>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item command="logOut">退出登录</el-dropdown-item>
             </el-dropdown-menu>
@@ -56,7 +50,7 @@ export default {
           to: "/"
         }
       ],
-      like: false,
+      isEnter: false,
       isChange: true // 路由切换时的状态记录
     }
   },
@@ -69,11 +63,8 @@ export default {
     }
   },
   computed: {
-    isAnimated() {
-      return this.like ? "animated heartBeat" : ""
-    },
-    isColor() {
-      return this.like ? "#F05654" : ""
+    isEnterAvatar() {
+      return this.isEnter? "animated tada": ""
     }
   },
   methods: {
@@ -102,8 +93,8 @@ export default {
         this.isChange = true
       })
     },
-    handleLike() {
-      this.like = !this.like
+    handleLike(...data) {
+      console.log(data[0])
     }
   },
   created() {
@@ -130,11 +121,11 @@ $navBarHeight: 50px;
     display: block;
     color: #606266;
     margin-left: 20px;
+    cursor: pointer;
     img {
-      height: 40px;
-      width: 40px;
+      height: 35px;
+      width: 35px;
       border-radius: 5px;
-      margin-right: 5px;
     }
   }
 }
