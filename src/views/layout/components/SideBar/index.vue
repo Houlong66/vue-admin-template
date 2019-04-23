@@ -63,11 +63,6 @@ export default {
       showTitle: true
     };
   },
-  watch: {
-    "$route": function () {
-      this.$refs.elMenu.activeIndex = this.$route.meta.routeText
-    }
-  },
   computed: {
     ...mapState(['route'])
   },
@@ -94,6 +89,7 @@ export default {
       this.isCollapse = !this.isCollapse;
     },
     initBar() {
+      // this.$refs.elMenu.activeIndex = this.$route.meta.routeText
       routes.forEach((item, index) => {
         // 只显示要展示的子路由
         if (item.children) {

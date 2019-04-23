@@ -7,12 +7,18 @@ import 'nprogress/nprogress.css'
 
 import sideBarRoutes from './sideBarRoutes'
 const NotFound = resolve => require(['@/views/other/404.vue'], resolve)
+const Login = resolve => require(['@/views/login/index.vue'], resolve)
 
 Vue.use(Router)
 
 let routes = [{
     path: '/404',
     component: NotFound,
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
   },
   {
     path: "*",
@@ -34,12 +40,19 @@ if (localStore.get('?token') && store) {
 // 路由拦截
 router.beforeEach((to, from, next) => {
   nProgress.start()
+  // 如果是登录页面且已登录就直接去首页
+  if (to.name === 'Login' && store.getters.token) {
+    next({
+      path: '/'
+    })
+    return
+  }
   if (to.matched.some(r => r.meta.requireAuth)) {
     if (store.getters.token) {
       next()
     } else {
       next({
-        path: '/',
+        path: '/login',
         query: {
           redirect: to.fullPath
         }

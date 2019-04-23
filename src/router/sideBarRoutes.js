@@ -10,6 +10,9 @@ const routes = [{
     path: '/',
     redirect: 'main',
     name: "",
+    meta: {
+      requireAuth: true
+    },
     component: Layout,
     children: [{
       path: '/main',
@@ -25,6 +28,9 @@ const routes = [{
   {
     path: "/test_form",
     component: Layout,
+    meta: {
+      requireAuth: true
+    },
     children: [{
       path: 'index',
       name: 'TestForm',
@@ -40,6 +46,9 @@ const routes = [{
   {
     path: "/test_table",
     component: Layout,
+    meta: {
+      requireAuth: true
+    },
     children: [{
       path: 'index',
       name: 'TestTable',
@@ -56,7 +65,8 @@ const routes = [{
     path: '/test_father',
     meta: {
       routeText: "测试父路由",
-      routeIcon: "el-icon-location"
+      routeIcon: "el-icon-location",
+      requireAuth: true
     },
     redirect: {
       name: 'TestChild'

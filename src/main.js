@@ -13,7 +13,7 @@ import '@/style/main.scss'
 import '@/icons'
 
 // 引入通用组件
-import CmComponents from '@/components'
+import '@/components'
 
 // api
 import api from '@/api'
@@ -24,7 +24,6 @@ import base from '@/utils/base'
 
 Vue.config.productionTip = false
 
-Vue.use(CmComponents)
 Vue.use(base)
 Vue.use(ElementUI)
 

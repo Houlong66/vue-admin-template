@@ -27,7 +27,7 @@
               <!-- <i class="el-icon-caret-bottom"></i> -->
             </div>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item command="logOut">退出登录</el-dropdown-item>
+              <el-dropdown-item command="logout">退出登录</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </el-row>
@@ -69,7 +69,14 @@ export default {
   },
   methods: {
     handleCommand(command) {
-      console.log(command)
+      switch(command) {
+      case 'logout':
+        this.$store.dispatch('logout')
+        this.$router.push('/login')
+        break
+      default:
+        break
+      }
     },
     initBar() {
       // 切换成false让组件重渲染
