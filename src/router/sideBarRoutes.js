@@ -1,10 +1,4 @@
-const Layout = resolve => require(['@/views/layout/index.vue'], resolve)
-const TestForm = resolve => require(['@/views/main/TestForm.vue'], resolve)
-const TestTable = resolve => require(['@/views/main/TestTable.vue'], resolve)
-const TestChild = resolve => require(['@/views/main/TestChild.vue'], resolve)
-const TestChild1 = resolve => require(['@/views/main/TestChild1.vue'], resolve)
-const TestChild2 = resolve => require(['@/views/main/TestChild2.vue'], resolve)
-const TestMain = resolve => require(['@/views/main/TestMain.vue'], resolve)
+const _import = require('./_import_' + process.env.NODE_ENV)
 
 const routes = [{
     path: '/',
@@ -13,7 +7,7 @@ const routes = [{
     meta: {
       requireAuth: true
     },
-    component: Layout,
+    component: _import('layout/index'),
     children: [{
       path: '/main',
       name: "Main",
@@ -22,12 +16,12 @@ const routes = [{
         routeIcon: "el-icon-goods",
         showSideBar: true
       },
-      component: TestMain
+      component: _import('main/TestMain')
     }]
   },
   {
     path: "/test_form",
-    component: Layout,
+    component: _import('layout/index'),
     meta: {
       requireAuth: true
     },
@@ -40,12 +34,12 @@ const routes = [{
         showSideBar: true,
         keepAlive: true
       },
-      component: TestForm
+      component: _import('main/TestForm')
     }]
   },
   {
     path: "/test_table",
-    component: Layout,
+    component: _import('layout/index'),
     meta: {
       requireAuth: true
     },
@@ -58,7 +52,7 @@ const routes = [{
         showSideBar: true,
         keepAlive: true
       },
-      component: TestTable,
+      component: _import('main/TestTable'),
     }]
   },
   {
@@ -71,7 +65,7 @@ const routes = [{
     redirect: {
       name: 'TestChild'
     },
-    component: Layout,
+    component: _import('layout/index'),
     children: [{
         path: 'test_child',
         name: "TestChild",
@@ -80,14 +74,14 @@ const routes = [{
           showSideBar: true,
           keepAlive: true
         },
-        component: TestChild,
+        component: _import('main/TestChild'),
         children: [{
           path: 'test_child2',
           name: "TestChild2",
           meta: {
             routeText: "测试子路由2"
           },
-          component: TestChild2
+          component: _import('main/TestChild2')
         }]
       },
       {
@@ -97,7 +91,7 @@ const routes = [{
           routeText: "测试子路由1",
           showSideBar: true
         },
-        component: TestChild1
+        component: _import('main/TestChild1')
       }
     ]
   }

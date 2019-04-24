@@ -6,19 +6,18 @@ import nProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
 import sideBarRoutes from './sideBarRoutes'
-const NotFound = resolve => require(['@/views/other/404.vue'], resolve)
-const Login = resolve => require(['@/views/login/index.vue'], resolve)
+const _import = require('./_import_' + process.env.NODE_ENV)
 
 Vue.use(Router)
 
 let routes = [{
     path: '/404',
-    component: NotFound,
+    component: _import('other/404'),
   },
   {
     path: '/login',
     name: 'Login',
-    component: Login
+    component: _import('login/index')
   },
   {
     path: "*",
