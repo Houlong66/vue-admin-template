@@ -104,8 +104,8 @@ export default {
     operates: {
       type: Object,
       default: () => {        return {
-          list: []
-        }      } // width:按钮列宽，fixed：是否固定（left,right）,按钮集合 === label: 文本，type :类型（primary / success / warning / danger / info / text），show：是否显示，icon：按钮图标，plain：是否朴素按钮，disabled：是否禁用，method：回调方法
+        list: []
+      }      } // width:按钮列宽，fixed：是否固定（left,right）,按钮集合 === label: 文本，type :类型（primary / success / warning / danger / info / text），show：是否显示，icon：按钮图标，plain：是否朴素按钮，disabled：是否禁用，method：回调方法
     },
     total: {
       type: Number,
@@ -117,7 +117,7 @@ export default {
     },
     height: {
       type: String,
-      default: "auto"
+      default: 'auto'
     },
     maxHeight: {
       type: Number,
@@ -207,8 +207,8 @@ export default {
     },
     // 筛选
     handleFilter(value, row, column) {
-      const property = column['property'];
-      return row[property] === value;
+      const property = column['property']
+      return row[property] === value
     }
   }
 }

@@ -52,7 +52,7 @@
 import routes from '@/router/sideBarRoutes'
 import { mapState } from 'vuex'
 export default {
-  name: "SideBar",
+  name: 'SideBar',
   data() {
     return {
       isCollapse: false,
@@ -61,32 +61,32 @@ export default {
       sideBarRoutes: [],
       logo: require('../../../../assets/logo.png'),
       showTitle: true
-    };
+    }
   },
   computed: {
     ...mapState(['route'])
   },
   methods: {
     isClossTabFun() {
-      clearInterval(this.intelval);
+      clearInterval(this.intelval)
       if (!this.isCollapse) {
         this.intelval = setInterval(() => {
           if (this.tabWidth <= 64) {
-            clearInterval(this.intelval);
+            clearInterval(this.intelval)
             this.showTitle = false
           }
-          this.tabWidth -= 1.8;
-        }, 1);
+          this.tabWidth -= 1.8
+        }, 1)
       } else {
         this.intelval = setInterval(() => {
           if (this.tabWidth >= 200) {
-            clearInterval(this.intelval);
+            clearInterval(this.intelval)
             this.showTitle = true
           }
-          this.tabWidth += 1.8;
-        }, 1);
+          this.tabWidth += 1.8
+        }, 1)
       }
-      this.isCollapse = !this.isCollapse;
+      this.isCollapse = !this.isCollapse
     },
     initBar() {
       // this.$refs.elMenu.activeIndex = this.$route.meta.routeText
@@ -111,7 +111,7 @@ export default {
   mounted() {
     this.initBar()
   }
-};
+}
 </script>
 
 <style scoped lang="scss">

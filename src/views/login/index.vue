@@ -6,10 +6,20 @@
           <h2>Vue管理后台模板</h2>
         </el-form-item>
         <el-form-item>
-          <el-input ref="account" v-model="formLogin.loginName" placeholder="账号" @keyup.enter.native="login"></el-input>
+          <el-input
+            ref="account"
+            v-model="formLogin.loginName"
+            placeholder="账号"
+            @keyup.enter.native="login"
+          ></el-input>
         </el-form-item>
         <el-form-item>
-          <el-input v-model="formLogin.password" placeholder="密码" type="password" @keyup.enter.native="login"></el-input>
+          <el-input
+            v-model="formLogin.password"
+            placeholder="密码"
+            type="password"
+            @keyup.enter.native="login"
+          ></el-input>
         </el-form-item>
         <el-row type="flex" justify="center">
           <el-button
@@ -26,14 +36,14 @@
 
 <script>
 export default {
-  name: "login",
+  name: 'login',
   data() {
     return {
       formLogin: {
-        password: "",
-        loginName: ""
+        password: '',
+        loginName: ''
       }
-    };
+    }
   },
   mounted() {
     this.$refs.account.focus()
@@ -45,9 +55,9 @@ export default {
         password: this.formLogin.password
       }
       this.$store
-        .dispatch("login", tempData)
+        .dispatch('login', tempData)
         .then(() => {
-          this.$message.success("登录成功")
+          this.$message.success('登录成功')
           this.$router.replace({ path: '/' })
         })
         .catch(err => {
@@ -55,7 +65,7 @@ export default {
         })
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

@@ -26,21 +26,21 @@ export default {
       list: [
         {
           id: 1,
-          title: "测试标题",
+          title: '测试标题',
           state: 0,
-          author: "测试作者",
-          phone: "123456789",
-          email: "51698@1564.com",
-          createDate: "2019-04-21"
+          author: '测试作者',
+          phone: '123456789',
+          email: '51698@1564.com',
+          createDate: '2019-04-21'
         },
         {
           id: 1,
-          title: "测试标题",
+          title: '测试标题',
           state: 1,
-          author: "测试作者",
-          phone: "123456789",
-          email: "51698@1564.com",
-          createDate: "2019-04-21"
+          author: '测试作者',
+          phone: '123456789',
+          email: '51698@1564.com',
+          createDate: '2019-04-21'
         }
       ],
       maxHeight: 500,
@@ -58,8 +58,8 @@ export default {
           width: 200,
           render: (h, params) => {
             return h('el-button', {
-              props: {type: "text"},
-              style: {color: "red"}
+              props: { type: 'text' },
+              style: { color: 'red' }
             }, params.row.title)
           }
         },
@@ -75,11 +75,11 @@ export default {
           },
           filters: [
             {
-              text: "上架",
+              text: '上架',
               value: 0
             },
             {
-              text: "下架",
+              text: '下架',
               value: 1
             }
           ],
@@ -112,7 +112,7 @@ export default {
       ], // 需要展示的列
       operates: {
         width: 200,
-        fixed: "right",
+        fixed: 'right',
         list: [
           {
             label: '编辑',

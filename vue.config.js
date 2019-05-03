@@ -5,6 +5,7 @@ function resolve(dir) {
 }
 
 module.exports = {
+  lintOnSave: process.env.NODE_ENV !== 'production',
   publicPath: process.env.VUE_APP_BASE_URL,
   // 输出文件目录
   outputDir: 'vue-admin-template',
@@ -31,12 +32,12 @@ module.exports = {
   devServer: {
     port: 8088,
     // proxy: {
-      // 反向代理示例
-      // '/': {
-        // ws: false,
-        // target: 'http:/www.qq.com',
-        // changeOrigin: true
-      // }
+    // 反向代理示例
+    // '/': {
+    // ws: false,
+    // target: 'http:/www.qq.com',
+    // changeOrigin: true
+    // }
     // }
   }
 }

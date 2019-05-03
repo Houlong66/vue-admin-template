@@ -20,7 +20,7 @@ const actions = {
   },
   logout ({commit}) {
     return new Promise(resolve => {
-      commit('set_token', "")
+      commit('set_token', '')
       resolve()
     })
   }

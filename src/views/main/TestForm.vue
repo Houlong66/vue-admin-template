@@ -16,26 +16,26 @@
 
 <script>
 export default {
-  name: "TestForm",
+  name: 'TestForm',
   data() {
     return {
       formList: [
         {
-          itemType: "input",
-          model: "",
-          label: "测试输入框",
-          placeholder: "请输入",
-          prop: "testInput",
+          itemType: 'input',
+          model: '',
+          label: '测试输入框',
+          placeholder: '请输入',
+          prop: 'testInput',
           rules: [
-            { required: true, message: "不能为空" }
+            { required: true, message: '不能为空' }
           ]
         },
         {
-          itemType: "select",
-          model: "",
-          label: "测试选择框",
-          placeholder: "请选择",
-          prop: "testSelect",
+          itemType: 'select',
+          model: '',
+          label: '测试选择框',
+          placeholder: '请选择',
+          prop: 'testSelect',
           options: [{
             value: '选项1',
             label: '黄金糕'
@@ -53,15 +53,15 @@ export default {
             label: '北京烤鸭'
           }],
           rules: [
-            { required: true, message: "不能为空" }
+            { required: true, message: '不能为空' }
           ],
         },
         {
-          itemType: "radioGroup",
-          model: "",
-          label: "测试选择项",
-          size: "mini",
-          prop: "testRadio",
+          itemType: 'radioGroup',
+          model: '',
+          label: '测试选择项',
+          size: 'mini',
+          prop: 'testRadio',
           radios: [{
             value: '选项1',
             label: '黄金糕'
@@ -87,18 +87,18 @@ export default {
           }
         },
         {
-          itemType: "checkboxGroup",
+          itemType: 'checkboxGroup',
           model: [],
-          label: "测试多选框",
-          prop: "testCheckbox",
+          label: '测试多选框',
+          prop: 'testCheckbox',
           checkboxs: [
             {
-              label: "1",
-              text: "321"
+              label: '1',
+              text: '321'
             },
             {
-              label: "4",
-              text: "true",
+              label: '4',
+              text: 'true',
             }
           ],
           dataAuth: () => {
@@ -110,24 +110,24 @@ export default {
           }
         },
         {
-          itemType: "datePicker",
-          label: "测试日期选择器",
-          prop: "testDate",
-          model: "",
-          valueFormat: "yyyy-MM-dd",
-          placeholder: "输入"
+          itemType: 'datePicker',
+          label: '测试日期选择器',
+          prop: 'testDate',
+          model: '',
+          valueFormat: 'yyyy-MM-dd',
+          placeholder: '输入'
         },
         {
-          itemType: "switch",
-          label: "测试开关",
-          prop: "testSwitch",
-          model: ""
+          itemType: 'switch',
+          label: '测试开关',
+          prop: 'testSwitch',
+          model: ''
         }
       ],
       buttonOption: {
         showSubmit: true,
         showReset: true,
-        submitText: "提交"
+        submitText: '提交'
       }
     }
   },

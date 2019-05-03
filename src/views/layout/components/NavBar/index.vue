@@ -22,7 +22,12 @@
             </cm-star>
           </el-tooltip>
           <el-dropdown @command="handleCommand">
-            <div class="avatar-box" @mouseenter="isEnter=true" @mouseleave="isEnter=false" :class="isEnterAvatar">
+            <div
+              class="avatar-box"
+              @mouseenter="isEnter=true"
+              @mouseleave="isEnter=false"
+              :class="isEnterAvatar"
+            >
               <img :src="images.avatar">
               <!-- <i class="el-icon-caret-bottom"></i> -->
             </div>
@@ -46,8 +51,8 @@ export default {
       },
       breadCrumbs: [
         {
-          text: "首页",
-          to: "/"
+          text: '首页',
+          to: '/'
         }
       ],
       isEnter: false,
@@ -58,18 +63,18 @@ export default {
     HeaderSearch
   },
   watch: {
-    "$route": function () {
+    '$route': function () {
       this.initBar()
     }
   },
   computed: {
     isEnterAvatar() {
-      return this.isEnter? "animated tada": ""
+      return this.isEnter ? 'animated tada' : ''
     }
   },
   methods: {
     handleCommand(command) {
-      switch(command) {
+      switch (command) {
       case 'logout':
         this.$store.dispatch('logout')
         this.$router.push('/login')
@@ -83,8 +88,8 @@ export default {
       this.isChange = false
       this.breadCrumbs = [
         {
-          text: "首页",
-          to: "/"
+          text: '首页',
+          to: '/'
         }
       ]
       this.$route.matched.forEach(item => {

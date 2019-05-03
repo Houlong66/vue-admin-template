@@ -21,7 +21,7 @@
 import { SideBar, NavBar, TabBar } from './components'
 
 export default {
-  name: "Layout",
+  name: 'Layout',
   components: {
     SideBar,
     NavBar,

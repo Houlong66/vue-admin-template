@@ -12,6 +12,7 @@
     "animate.css": "^3.7.0",
     "axios": "^0.18.0",
     "element-ui": "^2.7.2",
+    "eslint-plugin-html": "^5.0.3",
     "nprogress": "^0.2.0",
     "storejs": "^1.0.25",
     "svg-sprite-loader": "^4.1.3",

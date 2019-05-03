@@ -11,18 +11,18 @@ const _import = require('./_import_' + process.env.NODE_ENV)
 Vue.use(Router)
 
 let routes = [{
-    path: '/404',
-    component: _import('other/404'),
-  },
-  {
-    path: '/login',
-    name: 'Login',
-    component: _import('login/index')
-  },
-  {
-    path: "*",
-    redirect: '/404'
-  }
+  path: '/404',
+  component: _import('other/404'),
+},
+{
+  path: '/login',
+  name: 'Login',
+  component: _import('login/index')
+},
+{
+  path: '*',
+  redirect: '/404'
+}
 ]
 routes = routes.concat(sideBarRoutes)
 

@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "CmStar",
+  name: 'CmStar',
   data() {
     return {
       like: false
@@ -15,19 +15,19 @@ export default {
   props: {
     animate: {
       type: String,
-      default: "animated heartBeat"
+      default: 'animated heartBeat'
     },
     color: {
       type: String,
-      default: "#F05654"
+      default: '#F05654'
     }
   },
   computed: {
     isAnimated() {
-      return this.like ? this.animate : ""
+      return this.like ? this.animate : ''
     },
     isColor() {
-      return this.like ? this.color : ""
+      return this.like ? this.color : ''
     }
   },
   methods: {

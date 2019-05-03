@@ -8,10 +8,10 @@
 
 <script>
 export default {
-  name: "TestChild",
+  name: 'TestChild',
   data() {
     return {
-      test: ""
+      test: ''
     }
   }
 }

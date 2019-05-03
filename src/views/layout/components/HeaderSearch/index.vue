@@ -31,10 +31,10 @@
 <script>
 import routes from '@/router/sideBarRoutes'
 export default {
-  name: "HeaderSearch",
+  name: 'HeaderSearch',
   data() {
     return {
-      search: "",
+      search: '',
       options: [], // 选项
       allOptions: [], // 全部选项
       routes: [], // 路由
