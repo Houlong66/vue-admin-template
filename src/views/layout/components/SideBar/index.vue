@@ -3,7 +3,7 @@
     <div>
       <div :class="{'isClossTab':true,'ellipsis':!isCollapse}">
         <img :src="logo" width="18" class="logo">
-        <span v-if="showTitle">Vue管理后台模板</span>
+        <span v-if="showTitle">Vue后台管理系统模板</span>
       </div>
       <el-menu
         class="menu el-menu-vertical-demo"
@@ -12,6 +12,7 @@
         background-color="#304155"
         text-color="#C1CFD9"
         active-text-color="#409EFF"
+        unique-opened
         :default-active="$route.meta.routeText"
       >
         <template v-for="(route,index) in sideBarRoutes">
@@ -161,6 +162,16 @@ aside {
   .menu {
     width: 100%;
     border-right: 0;
+    height: 550px;
+    overflow: auto;
+    overflow-x: hidden;
+  }
+  .menu::-webkit-scrollbar {
+    width: 6px;
+    background-color: $background-color;
+  }
+  .menu::-webkit-scrollbar-thumb {
+    background-color: #506e91;
   }
   .el-submenu__title i,
   .el-menu-item i {
