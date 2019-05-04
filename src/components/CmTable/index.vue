@@ -80,7 +80,7 @@
       @size-change="handleSizeChange"
       @current-change="handleIndexChange"
       :page-size="tableCurrentPagination.pageSize"
-      :page-sizes="this.tableCurrentPagination.pageArray"
+      :page-sizes="tableCurrentPagination.pageArray"
       :current-page="tableCurrentPagination.pageIndex"
       layout="total,sizes, prev, pager, next,jumper"
       :total="total"
