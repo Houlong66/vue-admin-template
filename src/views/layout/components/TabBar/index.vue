@@ -29,7 +29,7 @@ export default {
   methods: {
     initBar() {
       // 如果初次访问的是首页，就不用添加项
-      if (this.$route.name === 'main' || !this.$route.meta.showSideBar) return
+      if (this.$route.name === 'Main' || !this.$route.meta.showSideBar) return
       let tempObj = {
         name: this.$route.name,
         text: this.$route.meta.routeText
@@ -42,7 +42,7 @@ export default {
     },
     isClosable(item) {
       // 首页项不能删
-      return this.isChosen(item) && item !== 'main'
+      return this.isChosen(item) && item !== 'Main'
     },
     handleClick(item) {
       this.$router.push({ name: item.name })
