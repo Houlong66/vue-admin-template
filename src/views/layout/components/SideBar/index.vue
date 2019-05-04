@@ -1,12 +1,12 @@
 <template>
-  <el-aside :width="tabWidth+'px'">
+  <el-aside class="aside-container">
     <div>
-      <div :class="{'isClossTab':true,'ellipsis':!isCollapse}">
+      <div :class="{'isClossTab':true,'close-tab':isCollapse}">
         <img :src="logo" width="18" class="logo">
-        <span v-if="showTitle">Vue后台管理系统模板</span>
+        <span :class="isCollapse?'animated fadeOut':'animated fadeIn'">智考后台管理系统</span>
       </div>
       <el-menu
-        class="menu el-menu-vertical-demo"
+        class="menu"
         ref="elMenu"
         :collapse="isCollapse"
         background-color="#304155"
@@ -43,7 +43,7 @@
         </template>
       </el-menu>
     </div>
-    <div class="closeIcon" @click="isClossTabFun">
+    <div class="closeIcon" @click="isCollapse = !isCollapse">
       <el-button type="text" :icon="isCollapse?'el-icon-d-arrow-right':'el-icon-d-arrow-left'"></el-button>
     </div>
   </el-aside>
@@ -60,35 +60,13 @@ export default {
       tabWidth: 200,
       intelval: null,
       sideBarRoutes: [],
-      logo: require('../../../../assets/logo.png'),
-      showTitle: true
+      logo: require('../../../../assets/logo.png')
     }
   },
   computed: {
     ...mapState(['route'])
   },
   methods: {
-    isClossTabFun() {
-      clearInterval(this.intelval)
-      if (!this.isCollapse) {
-        this.intelval = setInterval(() => {
-          if (this.tabWidth <= 64) {
-            clearInterval(this.intelval)
-            this.showTitle = false
-          }
-          this.tabWidth -= 1.8
-        }, 1)
-      } else {
-        this.intelval = setInterval(() => {
-          if (this.tabWidth >= 200) {
-            clearInterval(this.intelval)
-            this.showTitle = true
-          }
-          this.tabWidth += 1.8
-        }, 1)
-      }
-      this.isCollapse = !this.isCollapse
-    },
     initBar() {
       // this.$refs.elMenu.activeIndex = this.$route.meta.routeText
       routes.forEach((item, index) => {
@@ -120,6 +98,13 @@ $header-height: 60px;
 $background-color: #304155;
 $color: #fff;
 
+.aside-container {
+  width: auto !important;
+}
+.close-tab {
+  width: 64px !important;
+}
+
 aside {
   position: relative;
   overflow: hidden;
@@ -128,13 +113,13 @@ aside {
   color: $color;
 
   .isClossTab {
-    width: 100%;
+    width: 200px;
     padding: 0 20px;
     height: $header-height;
+    transition: width 0.7s;
     font-size: 14px;
     line-height: $header-height;
     font-weight: normal;
-    border-right: 1px solid #807c7c;
     box-sizing: border-box;
     position: relative;
     overflow: hidden;
@@ -143,10 +128,6 @@ aside {
       top: 3px;
       margin-right: 10px;
     }
-  }
-  .ellipsis {
-    text-overflow: ellipsis;
-    white-space: nowrap;
   }
   .closeIcon {
     position: absolute;
@@ -160,11 +141,13 @@ aside {
     }
   }
   .menu {
-    width: 100%;
     border-right: 0;
     height: 550px;
     overflow: auto;
     overflow-x: hidden;
+  }
+  .menu:not(.el-menu--collapse) {
+    width: 200px;
   }
   .menu::-webkit-scrollbar {
     width: 6px;
