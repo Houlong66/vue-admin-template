@@ -1,6 +1,7 @@
 .DS_Store
 node_modules
 /dist
+/vue-admin-template
 
 # local env files
 .env.local

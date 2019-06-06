@@ -58,14 +58,32 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@media screen and (max-width: 768px){
+  .tab-container {
+    padding-left: 5px;
+  }
+}
+@media screen and (min-width: 768px){
+  .tab-container {
+    padding-left: 20px;
+  }
+}
+.tab-container::-webkit-scrollbar {
+  height: 3px;
+  background-color: #fff;
+}
+.tab-container::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+}
 .tab-container {
   height: 35px;
   border-top: 2px solid #f8f8f8;
-  padding-left: 20px;
   line-height: 30px;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  white-space: nowrap;
   .tab {
     cursor: pointer;
-    position: relative;
     display: inline-block;
     border: 1px solid #999999;
     height: 25px;

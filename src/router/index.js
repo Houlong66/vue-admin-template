@@ -12,6 +12,7 @@ Vue.use(Router)
 
 let routes = [{
   path: '/404',
+  name: 'NotFound',
   component: _import('other/404'),
 },
 {
@@ -36,9 +37,21 @@ if (localStore.get('?token') && store) {
   store.commit('set_token', localStore.get('token'))
 }
 
+// 不添加到navBar的路由项
+const excludeNames = ['Login', 'NotFound']
+
 // 路由拦截
 router.beforeEach((to, from, next) => {
   nProgress.start()
+  // 添加TabBar的项
+  if (!excludeNames.includes(to.name)) {
+    let tempObj = {
+      name: to.name,
+      text: to.meta.routeText
+    }
+    store.commit('add_route', tempObj)
+    store.commit('add_cached', to)
+  }
   // 如果是登录页面且已登录就直接去首页
   if (to.name === 'Login' && store.getters.token) {
     next({

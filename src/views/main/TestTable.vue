@@ -112,7 +112,6 @@ export default {
       ], // 需要展示的列
       operates: {
         width: 200,
-        fixed: 'right',
         list: [
           {
             label: '编辑',

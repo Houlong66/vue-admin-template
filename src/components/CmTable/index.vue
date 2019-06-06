@@ -77,6 +77,7 @@
     <!--region 分页-->
     <el-pagination
       v-if="pagination"
+      class="mobile-pagination"
       @size-change="handleSizeChange"
       @current-change="handleIndexChange"
       :page-size="tableCurrentPagination.pageSize"
@@ -272,6 +273,13 @@ export default {
     border-bottom-left-radius: 6px;
     border-top-left-radius: 6px;
     cursor: pointer;
+  }
+}
+@media screen and (max-width: 768px){
+  .mobile-pagination {
+    float: none !important;
+    margin: 0 !important;
+    white-space: normal !important;
   }
 }
 </style>

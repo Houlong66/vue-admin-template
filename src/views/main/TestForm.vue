@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-row>
-      <el-col :span="12">
+      <el-col :sm="12" :xs="24">
         <cm-form
           ref="cmForm"
           :formList="formList"

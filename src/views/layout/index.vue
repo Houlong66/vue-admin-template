@@ -1,6 +1,7 @@
 <template>
   <el-container class="app-wrapper">
-    <side-bar></side-bar>
+    <side-bar v-show="common.showSidebar" class="mobile-sidebar animated fadeInLeft faster"></side-bar>
+    <div class="left-container" v-show="common.showSidebar" @click="handleShowSidebar"></div>
     <el-container class="container">
       <el-header class="nav-container">
         <nav-bar></nav-bar>
@@ -19,7 +20,7 @@
 
 <script>
 import { SideBar, NavBar, TabBar } from './components'
-
+import { mapState } from 'vuex'
 export default {
   name: 'Layout',
   components: {
@@ -27,12 +28,23 @@ export default {
     NavBar,
     TabBar
   },
+  data() {
+    return {
+      isMobile: false
+    }
+  },
   computed: {
+    ...mapState(['common']),
     key() {
       return this.$route.fullPath
     },
     cachedViews() {
       return this.$store.state.route.cachedRoutes
+    },
+  },
+  methods: {
+    handleShowSidebar() {
+      this.$store.commit('set_show_sidebar', !this.common.showSidebar)
     }
   }
 }
@@ -52,6 +64,22 @@ export default {
   }
   .main-container {
     background: #f8f8f8;
+  }
+}
+@media screen and (max-width: 768px) {
+  .mobile-sidebar {
+    position: fixed;
+    left: 0;
+    z-index: 2003;
+  }
+  .left-container {
+    position: fixed;
+    right: 0;
+    width: calc(100% - 200px);
+    height: 100%;
+    z-index: 2003;
+    background: #fff;
+    opacity: 0.5;
   }
 }
 </style>

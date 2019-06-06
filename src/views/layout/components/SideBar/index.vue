@@ -43,7 +43,7 @@
         </template>
       </el-menu>
     </div>
-    <div class="closeIcon" @click="isCollapse = !isCollapse">
+    <div class="closeIcon hidden-xs-only" @click="isCollapse = !isCollapse">
       <el-button type="text" :icon="isCollapse?'el-icon-d-arrow-right':'el-icon-d-arrow-left'"></el-button>
     </div>
   </el-aside>
@@ -52,6 +52,7 @@
 <script>
 import routes from '@/router/sideBarRoutes'
 import { mapState } from 'vuex'
+import 'element-ui/lib/theme-chalk/display.css'
 export default {
   name: 'SideBar',
   data() {
@@ -60,11 +61,11 @@ export default {
       tabWidth: 200,
       intelval: null,
       sideBarRoutes: [],
-      logo: require('../../../../assets/logo.png')
+      logo: require('../../../../assets/logo.png'),
     }
   },
   computed: {
-    ...mapState(['route'])
+    ...mapState(['route','common'])
   },
   methods: {
     initBar() {
@@ -78,16 +79,15 @@ export default {
       this.sideBarRoutes = routes
     },
     handleClick(item) {
-      let tempObj = {
-        name: item.name,
-        text: item.meta.routeText
+      if (this.common.isMobile) {
+        this.$store.commit('set_show_sidebar', false)
       }
-      this.$store.commit('add_route', tempObj)
-      this.$store.commit('add_cached', item)
       this.$router.push({ name: item.name })
     }
   },
   mounted() {
+    // 如果是移动端，默认收起
+    // this.isCollapse = this.$native().android || this.$native().iPhone
     this.initBar()
   }
 }

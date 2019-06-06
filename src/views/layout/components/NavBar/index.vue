@@ -1,33 +1,26 @@
 <template>
   <div>
     <el-row class="navbar-container" type="flex" justify="space-between" align="middle">
-      <el-col :span="14">
+      <div v-if="common.isMobile" class="sidebar-icon" @click="handleShowSidebar">
+        <svg-icon iconName="sidebar"></svg-icon>
+      </div>
+      <el-col :sm="14" :xs="20">
         <el-breadcrumb separator="/">
           <template v-for="(item,index) in breadCrumbs">
-            <el-breadcrumb-item
-              v-if="isChange"
-              :key="index"
-              :to="{path: item.to}"
-              :class="index===breadCrumbs.length-1?'animated lightSpeedIn fast':''"
-            >{{item.text}}</el-breadcrumb-item>
+            <el-breadcrumb-item v-if="!(isMobile&&(index!==breadCrumbs.length-1))" :key="index" :to="{path: item.to}" :class="index===breadCrumbs.length-1?'animated lightSpeedIn fast':''">{{item.text}}</el-breadcrumb-item>
           </template>
         </el-breadcrumb>
       </el-col>
-      <el-col :span="10">
+      <el-col :sm="10" :xs="4">
         <el-row type="flex" align="middle" justify="end" class="navbar-right-row">
-          <header-search></header-search>
-          <el-tooltip class="item" effect="dark" content="点赞" placement="bottom" :open-delay="500">
+          <header-search class="hidden-xs-only"></header-search>
+          <el-tooltip class="item hidden-xs-only" effect="dark" content="点赞" placement="bottom" :open-delay="500">
             <cm-star @handleClick="handleLike">
               <svg-icon iconName="good" height="20" width="20"></svg-icon>
             </cm-star>
           </el-tooltip>
-          <el-dropdown @command="handleCommand">
-            <div
-              class="avatar-box"
-              @mouseenter="isEnter=true"
-              @mouseleave="isEnter=false"
-              :class="isEnterAvatar"
-            >
+          <el-dropdown @command="handleCommand" trigger="click">
+            <div class="avatar-box" @mouseenter="isEnter=true" @mouseleave="isEnter=false" :class="isEnterAvatar">
               <img :src="images.avatar">
               <!-- <i class="el-icon-caret-bottom"></i> -->
             </div>
@@ -43,6 +36,8 @@
 
 <script>
 import HeaderSearch from '../HeaderSearch'
+import 'element-ui/lib/theme-chalk/display.css'
+import { mapState } from 'vuex'
 export default {
   data() {
     return {
@@ -56,7 +51,7 @@ export default {
         }
       ],
       isEnter: false,
-      isChange: true // 路由切换时的状态记录
+      isMobile: false,
     }
   },
   components: {
@@ -68,6 +63,7 @@ export default {
     }
   },
   computed: {
+    ...mapState(['common']),
     isEnterAvatar() {
       return this.isEnter ? 'animated tada' : ''
     }
@@ -84,8 +80,6 @@ export default {
       }
     },
     initBar() {
-      // 切换成false让组件重渲染
-      this.isChange = false
       this.breadCrumbs = [
         {
           text: '首页',
@@ -101,15 +95,16 @@ export default {
           this.breadCrumbs.push(tempObj)
         }
       })
-      this.$nextTick(() => {
-        this.isChange = true
-      })
     },
     handleLike(...data) {
       console.log(data[0])
+    },
+    handleShowSidebar() {
+      this.$store.commit('set_show_sidebar', !this.common.showSidebar)
     }
   },
   created() {
+    this.isMobile = this.$native().android || this.$native().iPhone
     this.initBar()
   }
 }
@@ -117,10 +112,27 @@ export default {
 
 <style lang="scss" scoped>
 $navBarHeight: 50px;
+@media screen and (max-width: 768px) {
+  .navbar-container {
+    padding: 0 10px;
+    padding-left: 40px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .navbar-container {
+    padding: 0 20px;
+  }
+}
 .navbar-container {
   height: $navBarHeight;
-  padding-left: 20px;
-  padding-right: 40px;
+  position: relative;
+  .sidebar-icon {
+    position: absolute;
+    z-index: 2002;
+    top: 50%;
+    left: 5px;
+    transform: translate(0, -50%);
+  }
   .navbar-right-row {
     svg {
       margin-left: 12px;
@@ -139,6 +151,11 @@ $navBarHeight: 50px;
       width: 35px;
       border-radius: 5px;
     }
+  }
+  .ellipsis {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 }
 </style>
