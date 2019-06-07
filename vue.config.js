@@ -4,11 +4,25 @@ function resolve(dir) {
   return path.join(__dirname, './', dir)
 }
 
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
+const productionGzipExtensions = ['js', 'css']
+const isProduction = process.env.NODE_ENV === 'production'
+
 module.exports = {
   lintOnSave: process.env.NODE_ENV !== 'production',
   publicPath: process.env.VUE_APP_BASE_URL,
   // 输出文件目录
-  outputDir: 'vue-admin-template',
+  outputDir: isProduction? process.env.VUE_APP_BASE_URL.split('/')[1]: 'vue-admin-template',
+  configureWebpack: config => {
+    if (isProduction) {
+      config.plugins.push(new CompressionWebpackPlugin({
+        algorithm: 'gzip',
+        test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
+        threshold: 10240,
+        minRatio: 0.8
+      }))
+    }
+  },
   chainWebpack: config => {
     // svg loader
     const svgRule = config.module.rule('svg') // 找到svg-loader
