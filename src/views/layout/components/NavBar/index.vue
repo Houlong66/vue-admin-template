@@ -128,7 +128,7 @@ $navBarHeight: 50px;
   position: relative;
   .sidebar-icon {
     position: absolute;
-    z-index: 2002;
+    z-index: 99;
     top: 50%;
     left: 5px;
     transform: translate(0, -50%);
