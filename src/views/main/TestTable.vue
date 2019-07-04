@@ -56,7 +56,7 @@ export default {
           label: '标题',
           align: 'center',
           width: 200,
-          render: (h, params) => {
+          render: ({h, params}) => {
             return h('el-button', {
               props: { type: 'text' },
               style: { color: 'red' }
@@ -68,7 +68,7 @@ export default {
           label: '状态',
           align: 'center',
           width: '160',
-          render: (h, params) => {
+          render: ({h, params}) => {
             return h('el-tag', {
               props: { type: params.row.state === 0 ? 'success' : params.row.state === 1 ? 'info' : 'danger' } // 组件的props
             }, params.row.state === 0 ? '上架' : params.row.state === 1 ? '下架' : '审核中')
@@ -122,7 +122,7 @@ export default {
             icon: 'el-icon-edit',
             plain: true,
             disabled: false,
-            method: (index, row) => {
+            method: ({index, row}) => {
               this.handleEdit(index, row)
             }
           },
@@ -135,7 +135,7 @@ export default {
             disabled: (index, row) => {
               return false
             },
-            method: (index, row) => {
+            method: ({index, row}) => {
               this.handleDel(index, row)
             }
           }

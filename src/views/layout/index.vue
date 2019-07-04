@@ -1,6 +1,6 @@
 <template>
   <el-container class="app-wrapper">
-    <side-bar v-show="common.showSidebar" class="mobile-sidebar animated fadeInLeft faster"></side-bar>
+    <side-bar v-show="common.showSidebar" :class="{'mobile-sidebar':true, 'animated fadeInLeft faster':common.isMobile}"></side-bar>
     <div class="left-container" v-show="common.showSidebar" @click="handleShowSidebar"></div>
     <el-container class="container">
       <el-header class="nav-container">

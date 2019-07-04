@@ -2,70 +2,45 @@
 <!--region 封装的分页 table-->
 <template>
   <div class="table">
-    <el-table
-      id="cmTable"
-      v-loading.cmTable="options.loading"
-      :data="list"
-      :height="height"
-      :max-height="maxHeight"
-      :stripe="options.stripe"
-      :highlight-current-row="options.highlightCurrentRow"
-      ref="cmTable"
-      @selection-change="handleSelectionChange"
-    >
+    <el-table id="cmTable" v-loading.cmTable="options.loading" :data="list" :height="height" :max-height="maxHeight"
+      :stripe="options.stripe" :highlight-current-row="options.highlightCurrentRow" ref="cmTable"
+      @selection-change="handleSelectionChange">
       <!--region 选择框-->
       <el-table-column v-if="options.mutiSelect" type="selection" style="width: 55px;"></el-table-column>
       <!--endregion-->
       <!--region 数据列-->
       <template v-for="(column, index) in columns">
-        <el-table-column
-          :prop="column.prop"
-          :label="column.label"
-          :align="column.align"
-          :width="column.width"
-          :filters="column.filters"
-          :filter-method="column.filters?handleFilter:undefined"
-          :sortable="column.sortable"
-          :sort-method="column.sortMethod"
-          :key="index"
-        >
+        <el-table-column :prop="column.prop" :label="column.label" :align="column.align" :width="column.width"
+          :filters="column.filters" :filter-method="column.filters?handleFilter:undefined" :sortable="column.sortable"
+          :sort-method="column.sortMethod" :key="index">
           <template slot-scope="scope">
             <template v-if="!column.render">
               <template v-if="column.formatter">
-                <span v-html="column.formatter(scope.row, column)"></span>
+                <span v-html="column.formatter({row:scope.row, column:column,vm:$parent})"></span>
               </template>
               <template v-else>
                 <span>{{scope.row[column.prop]}}</span>
               </template>
             </template>
             <template v-else>
-              <expand-dom :column="column" :row="scope.row" :render="column.render" :index="index"></expand-dom>
+              <expand-dom :column="column" :row="scope.row" :vm="$parent" :render="column.render" :index="index">
+              </expand-dom>
             </template>
           </template>
         </el-table-column>
       </template>
       <!--endregion-->
       <!--region 按钮操作组-->
-      <el-table-column
-        ref="fixedColumn"
-        label="操作"
-        align="center"
-        :width="operates.width"
-        :fixed="operates.fixed"
-        v-if="operates.list.length > 0"
-      >
+      <el-table-column ref="fixedColumn" label="操作" align="center" :width="operates.width" :fixed="operates.fixed"
+        v-if="operates.list.length > 0">
         <template slot-scope="scope">
           <div class="operate-group">
             <template v-for="(btn, key) in operates.list">
               <div class="item" v-if="showButtonFn(btn,scope.$index,scope.row)" :key="key">
-                <el-button
-                  :type="btn.type"
-                  size="mini"
-                  :icon="btn.icon"
-                  :disabled="typeof btn.disabled==='function'?btn.disabled(scope.$index,scope.row):btn.disabled"
-                  :plain="btn.plain"
-                  @click.native.prevent="btn.method(scope.$index,scope.row)"
-                >{{ btn.label }}</el-button>
+                <el-button :type="btn.type" size="mini" :icon="btn.icon"
+                  :disabled="typeof btn.disabled==='function'?btn.disabled({index:scope.$index,row:scope.row}):btn.disabled"
+                  :plain="btn.plain" @click.native.prevent="btn.method({index:scope.$index,row:scope.row,vm:$parent})">
+                  {{ btn.label }}</el-button>
               </div>
             </template>
           </div>
@@ -75,17 +50,10 @@
     </el-table>
     <div style="height:12px"></div>
     <!--region 分页-->
-    <el-pagination
-      v-if="pagination"
-      class="mobile-pagination"
-      @size-change="handleSizeChange"
-      @current-change="handleIndexChange"
-      :page-size="tableCurrentPagination.pageSize"
-      :page-sizes="tableCurrentPagination.pageArray"
-      :current-page="tableCurrentPagination.pageIndex"
-      layout="total,sizes, prev, pager, next,jumper"
-      :total="total"
-    ></el-pagination>
+    <el-pagination v-if="pagination" class="mobile-pagination" @size-change="handleSizeChange"
+      @current-change="handleIndexChange" :page-size="tableCurrentPagination.pageSize"
+      :page-sizes="tableCurrentPagination.pageArray" :current-page="tableCurrentPagination.pageIndex"
+      layout="total,sizes, prev, pager, next,jumper" :total="total"></el-pagination>
     <!--endregion-->
   </div>
 </template>
@@ -118,11 +86,11 @@ export default {
     },
     height: {
       type: String,
-      default: 'auto'
+      default: null
     },
     maxHeight: {
       type: Number,
-      default: 160
+      default: null
     }, // 计算表格的高度
     options: {
       type: Object,
@@ -142,6 +110,7 @@ export default {
       props: {
         row: Object,
         render: Function,
+        vm: Object,
         index: Number,
         column: {
           type: Object,
@@ -154,7 +123,7 @@ export default {
           index: ctx.props.index
         }
         if (ctx.props.column) params.column = ctx.props.column
-        return ctx.props.render(h, params)
+        return ctx.props.render({ h, params, vm: ctx.props.vm })
       }
     }
   },
@@ -199,7 +168,7 @@ export default {
     showButtonFn(btn, index, row) {
       if (btn.show) {
         if (typeof btn.show === 'function') {
-          return btn.show(index, row)
+          return btn.show({ index, row })
         } else {
           return btn.show
         }
@@ -252,11 +221,11 @@ export default {
     }
   }
   .filter-data {
-    top: e("calc((100% - 100px) / 3)");
+    top: e('calc((100% - 100px) / 3)');
     background-color: rgba(0, 0, 0, 0.7);
   }
   .table-action {
-    top: e("calc((100% - 100px) / 2)");
+    top: e('calc((100% - 100px) / 2)');
     background-color: rgba(0, 0, 0, 0.7);
   }
   .fix-right {
@@ -275,7 +244,7 @@ export default {
     cursor: pointer;
   }
 }
-@media screen and (max-width: 768px){
+@media screen and (max-width: 768px) {
   .mobile-pagination {
     float: none !important;
     margin: 0 !important;
