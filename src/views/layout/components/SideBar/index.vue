@@ -3,7 +3,7 @@
     <div>
       <div :class="{'isClossTab':true,'close-tab':isCollapse}">
         <img :src="logo" width="18" class="logo">
-        <span :class="isCollapse?'animated fadeOut':'animated fadeIn'">智考后台管理系统</span>
+        <span :class="isCollapse?'animated fadeOut':'animated fadeIn'">vue后台管理系统</span>
       </div>
       <el-menu
         class="menu"
@@ -15,7 +15,7 @@
         unique-opened
         :default-active="$route.meta.routeText"
       >
-        <side-bar-item v-for="(route, index) in sideBarRoutes" :key="index" :index='route.meta.routeText' :route='route'>
+        <side-bar-item v-for="(route, index) in sideBarRoutes" :key="index" :route='route'>
        </side-bar-item>
       </el-menu>
     </div>
