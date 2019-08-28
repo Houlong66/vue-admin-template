@@ -3,7 +3,7 @@
     <div>
       <div :class="{'isClossTab':true,'close-tab':isCollapse}">
         <img :src="logo" width="18" class="logo">
-        <span :class="isCollapse?'animated fadeOut':'animated fadeIn'">智考后台管理系统</span>
+        <span :class="isCollapse?'animated fadeOut':'animated fadeIn'">vue后台管理系统</span>
       </div>
       <el-menu
         class="menu"
@@ -15,32 +15,8 @@
         unique-opened
         :default-active="$route.meta.routeText"
       >
-        <template v-for="(route,index) in sideBarRoutes">
-          <el-submenu :key="index" v-if="route.children.length>1" :index="`${index}`">
-            <template slot="title">
-              <i :class="route.meta.routeIcon"></i>
-              <span>{{route.meta.routeText}}</span>
-            </template>
-            <el-menu-item-group>
-              <el-menu-item
-                v-for="(subRoute,i) in route.children"
-                :key="i"
-                :index="subRoute.meta.routeText"
-              >
-                <div @click="handleClick(subRoute)">
-                  <i :class="subRoute.meta.routeIcon"></i>
-                  <span slot="title">{{subRoute.meta.routeText}}</span>
-                </div>
-              </el-menu-item>
-            </el-menu-item-group>
-          </el-submenu>
-          <el-menu-item v-else :index="route.children[0].meta.routeText" :key="index">
-            <div @click="handleClick(route.children[0])">
-              <i :class="route.children[0].meta.routeIcon"></i>
-              <span slot="title">{{route.children[0].meta.routeText}}</span>
-            </div>
-          </el-menu-item>
-        </template>
+        <side-bar-item v-for="(route, index) in sideBarRoutes" :key="index" :route='route'>
+       </side-bar-item>
       </el-menu>
     </div>
     <div class="closeIcon hidden-xs-only" @click="isCollapse = !isCollapse">
@@ -53,6 +29,8 @@
 import routes from '@/router/sideBarRoutes'
 import { mapState } from 'vuex'
 import 'element-ui/lib/theme-chalk/display.css'
+import SideBarItem from './SideBarItem'
+
 export default {
   name: 'SideBar',
   data() {
@@ -64,8 +42,11 @@ export default {
       logo: require('../../../../assets/logo.png'),
     }
   },
+  components:{
+    SideBarItem
+  },
   computed: {
-    ...mapState(['route','common'])
+    ...mapState(['common'])
   },
   methods: {
     initBar() {

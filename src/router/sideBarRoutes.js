@@ -63,36 +63,66 @@ const routes = [{
     requireAuth: true
   },
   redirect: {
-    name: 'TestChild'
+    name: 'TestChild1'
   },
   component: _import('layout/index'),
-  children: [{
-    path: 'test_child',
-    name: 'TestChild',
-    meta: {
-      routeText: '测试子路由',
-      showSideBar: true,
-      keepAlive: true
+  children: [
+    {
+      path: 'test_child1',
+      name: 'TestChild1',
+      meta: {
+        routeText: '测试子路由1',
+        showSideBar: true,
+        keepAlive: true
+      },
+      component: _import('main/nested/TestChild1'),
+      children: [
+        {
+          path: 'test_child11',
+          name: 'TestChild11',
+          meta: {
+            routeText: '测试子路由11'
+          },
+          component: _import('main/nested/TestChild11'),
+          children: [
+            {
+              path: 'test_child111',
+              name: 'TestChild111',
+              meta: {
+                routeText: '测试子路由111',
+                showSideBar: true
+              },
+              component: _import('main/nested/TestChild111')
+            },
+            {
+              path: 'test_child112',
+              name: 'TestChild112',
+              meta: {
+                routeText: '测试子路由112',
+                showSideBar: true
+              },
+              component: _import('main/nested/TestChild112')
+            }
+          ]
+        },
+        {
+          path: 'test_child12',
+          name: 'TestChild12',
+          meta: {
+            routeText: '测试子路由12'
+          },
+          component: _import('main/nested/TestChild12')
+        }]
     },
-    component: _import('main/TestChild'),
-    children: [{
+    {
       path: 'test_child2',
       name: 'TestChild2',
       meta: {
-        routeText: '测试子路由2'
+        routeText: '测试子路由2',
+        showSideBar: true
       },
-      component: _import('main/TestChild2')
-    }]
-  },
-  {
-    path: 'test_child1',
-    name: 'TestChild1',
-    meta: {
-      routeText: '测试子路由1',
-      showSideBar: true
-    },
-    component: _import('main/TestChild1')
-  }
+      component: _import('main/nested/TestChild2')
+    }
   ]
 }
 ]
